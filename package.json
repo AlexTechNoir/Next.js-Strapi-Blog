@@ -8,9 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "disqus-react": "^1.0.9",
     "next": "9.4.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-markdown": "^4.3.1",
     "styled-components": "^5.1.1",
     "swr": "^0.2.3"
   },

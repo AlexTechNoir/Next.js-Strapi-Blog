@@ -19,6 +19,8 @@ export default function MyApp({ Component, pageProps }) {
 const GlobalStyle = createGlobalStyle` 
   * {
     box-sizing: border-box;
+    font-family: 'Indie Flower', cursive;
+    font-family: 'Merriweather', serif;
   }
 
   html, body {
@@ -33,20 +35,6 @@ const GlobalStyle = createGlobalStyle`
 
   #__next {
     height: 100%;
-  }
-  
-  /* indie-flower-regular - latin */
-  @font-face {
-    font-family: 'Indie Flower';
-    font-style: normal;
-    font-weight: 400;
-    src: url('/fonts/indie-flower-v11-latin-regular.eot'); /* IE9 Compat Modes */
-    src: local('Indie Flower'), local('IndieFlower'),
-        url('/fonts/indie-flower-v11-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-        url('/fonts/indie-flower-v11-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
-        url('/fonts/indie-flower-v11-latin-regular.woff') format('woff'), /* Modern Browsers */
-        url('/fonts/indie-flower-v11-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-        url('/fonts/indie-flower-v11-latin-regular.svg#IndieFlower') format('svg'); /* Legacy iOS */
   }
 `
 

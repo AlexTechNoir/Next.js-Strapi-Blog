@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styled from 'styled-components'
 
-export default function about() {
+export default function About() {
   return (
     <>
       <Head>

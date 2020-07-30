@@ -10,4 +10,5 @@ export default function Footer() {
 
 const StyledFooter = styled.footer`
   grid-area: 3 / 1 / 4 / 2;
+  margin-top: 3em;
 `
