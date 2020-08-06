@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import styled from 'styled-components'
 import useSWR from 'swr'
+import Chip from '@material-ui/core/Chip'
 
 const fetcher = url => fetch(url).then(r => r.json())
 
@@ -37,8 +38,22 @@ export default function Home({ articles }) {
                         src={`http://localhost:1337${i.image[0].formats.small.url}`}
                         alt={i.image[0].alternativeText}
                       />
-                      <h1>{i.title}</h1>
-                      <time datetime={`${i.published_at.slice(0, 10)}`}>
+                      <h1>{i.title}</h1>                      
+                      <div>
+                        {
+                          i.categories.map(category => {
+                            return (
+                              <Chip 
+                                label={category.name} 
+                                variant="outlined" 
+                                color="primary" 
+                                size="small"
+                              />
+                            )
+                          })
+                        }
+                      </div>
+                      <time dateTime={`${i.published_at.slice(0, 10)}`}>
                         {new Date(i.published_at).toDateString().slice(4)}
                       </time>
                     </div>
@@ -79,6 +94,20 @@ const DivIndex = styled.div`
       }
       > h1 {
         margin: .5em .5em 0 .5em;
+      }
+      > div {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 0 1em 0 1em;
+        margin-top: 1em;
+        > a {
+          text-decoration: none;
+        }
+      }
+      > .disqus-comment-count {
+        padding: 0 1em 0 1em;
+        margin-top: 1em;
       }
       > time {
         align-self: flex-end;

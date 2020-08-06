@@ -27,8 +27,9 @@ export default function Article({ params, article }) {
   const disqusShortname = 'youknowwhatblog'
   const disqusConfig = {
     url: `http://localhost:3000/articles/${params.id}`,
-    identifier: 'article-id',
-    title: `${data.title}`
+    identifier: `${params.id}`,
+    title: `${data.title}`,
+    language: 'en_GB'
   }
   
   return (
