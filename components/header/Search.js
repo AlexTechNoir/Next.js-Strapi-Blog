@@ -3,9 +3,10 @@ import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import IconButton from '@material-ui/core/IconButton'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { useRouter } from 'next/router'
 
 function sleep(delay = 0) {
   return new Promise(resolve => {
@@ -17,6 +18,18 @@ export default function Search() {
   const [ open, setOpen ] = useState(false)
   const [ options, setOptions ] = useState([])
   const loading = open && options.length === 0
+
+  const router = useRouter()
+  const [ searchValue, setSearchValue ] = useState('')
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    if (location.pathname.includes('search')) {
+      inputRef.current.value = location.pathname.substr(location.pathname.lastIndexOf('/') + 1)
+    } else {
+      inputRef.current.value = ''
+    }
+  }, [])
 
   useEffect(() => {
     let active = true
@@ -47,8 +60,15 @@ export default function Search() {
     }
   }, [open])
 
+  const search = e => {
+    e.preventDefault()
+    if (searchValue !== '') {
+      router.push(`/search/${searchValue.trim()}`)
+    } else { return null }
+  }
+
   return (
-    <SearchBar>
+    <SearchBar onSubmit={search}>
       <Autocomplete
         id="asynchronous-demo"
         style={{ width: 300 }}
@@ -64,10 +84,11 @@ export default function Search() {
         options={options}
         loading={loading}
         forcePopupIcon={false}
+        onChange={(e, value) => setSearchValue(String(value))}
         renderInput={params => (
           <TextField
             {...params}
-            label="Search..."
+            label="Exact search..."
             InputProps={{
               ...params.InputProps,
               endAdornment: (
@@ -77,6 +98,8 @@ export default function Search() {
                 </>
               )
             }}
+            onChange={e => setSearchValue(String(e.target.value))}
+            ref={inputRef}            
           />
         )}
       />
