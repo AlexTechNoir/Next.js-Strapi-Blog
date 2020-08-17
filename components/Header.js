@@ -1,13 +1,18 @@
 import styled from 'styled-components'
+import { useState } from 'react'
 
 import Logo from './header/Logo'
 import Search from './header/Search'
+import Menu from './header/Menu'
 
 export default function Header() {
+  const [ isMenuOpen, setIsMenuOpen ] = useState(false)
+
   return (
     <StyledHeader>
-      <Logo />
+      <Logo setIsMenuOpen={setIsMenuOpen} />
       <Search />
+      <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
     </StyledHeader>
   )
 }

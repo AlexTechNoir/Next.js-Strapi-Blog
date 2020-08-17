@@ -32,8 +32,8 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Merriweather:ital,wght@1,700&display=swap" rel="preload" as="style" />
-          <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Merriweather:ital,wght@1,700&display=swap" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="preload" as="style" />
+          <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
         </Head>
         <body>
           <Main />

@@ -69,4 +69,13 @@ const DivArticle = styled.article`
       max-width: 1200px;
     }
   }
+  > ul, ol {
+    align-self: start;
+    padding-right: 1em;
+  }
+  > blockquote {
+    border-left: 5px solid #BBAB92;
+    padding-left: 1em;
+    align-self: start;
+  }
 `

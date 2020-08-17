@@ -6,7 +6,7 @@ config.autoAddCss = false
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
-export default function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }) { 
   return (
     <>
       <GlobalStyle />
@@ -22,7 +22,6 @@ export default function MyApp({ Component, pageProps }) {
 const GlobalStyle = createGlobalStyle` 
   * {
     box-sizing: border-box;
-    font-family: 'Indie Flower', cursive;
     font-family: 'Merriweather', serif;
   }
 

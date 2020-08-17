@@ -114,7 +114,7 @@ const SearchBar = styled.form`
   margin: 0 0 .5em 0;
   display: flex;
   > :first-child {
-    width: 150px !important;
+    width: 109px !important;
     > div > div {
       padding-right: 0 !important;
     }
