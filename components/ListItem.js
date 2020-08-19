@@ -33,6 +33,7 @@ export default function ListItem({ i }) {
                     variant="outlined"
                     color="primary"
                     size="small"
+                    key={category.id}
                   />
                 )
               })}
@@ -66,6 +67,7 @@ const StyledLink = styled.a`
   width: 100%;
   min-width: 320px;
   max-width: 425px;
+  cursor: pointer;
   > div {
     display: flex;
     flex-direction: column;

@@ -1,15 +1,22 @@
 import Head from 'next/head'
 import styled from 'styled-components'
-import useSWR from 'swr'
+import { useSWRInfinite } from 'swr'
 import Skeleton from '@material-ui/lab/Skeleton'
 import Typography from '@material-ui/core/Typography'
+import { useState, useEffect } from 'react'
+import Button from '@material-ui/core/Button'
 
 import ListItem from '../components/ListItem'
 
 const fetcher = url => fetch(url).then(r => r.json())
 
+const getKey = (pageIndex, previousPageData) => {
+  if (previousPageData && !previousPageData.length) return null
+  return `http://localhost:1337/articles?_sort=created_at:DESC&_start=${(pageIndex + 1) * 2}&_limit=2`
+}
+
 export async function getStaticProps() {
-  const articles = await fetcher('http://localhost:1337/articles')
+  const articles = await fetcher(`http://localhost:1337/articles?_sort=created_at:DESC&_start=0&_limit=2`)
 
   return {
     props: { articles }
@@ -17,9 +24,16 @@ export async function getStaticProps() {
 }
 
 export default function Home({ articles }) {
-  const { data, error } = useSWR('http://localhost:1337/articles', fetcher, { articles })
+  const [ shouldFetch, setShouldFetch ] = useState(false)
+  const { data, error, size, setSize } = useSWRInfinite(shouldFetch ? getKey : null, fetcher, { initialData: [[]] })
 
   const skeletonArr = [ 1, 2 ]
+
+  useEffect(() => {
+    if (shouldFetch) {
+      setSize(size + 1)
+    }
+  }, [shouldFetch])
 
   return (
     <>
@@ -29,7 +43,7 @@ export default function Home({ articles }) {
       </Head>
 
       <DivIndex>
-        {!data ? (
+        {!data && !articles ? (
           skeletonArr.map(i => {
             return (
               <div key={i}>
@@ -44,9 +58,21 @@ export default function Home({ articles }) {
         ) : error ? (
           <div>Error.</div>
         ) : (
-          data
-            .map((val, index, array) => array[array.length - 1 - index])
-            .map(i => <ListItem i={i} key={i.id} />)
+          <>
+            {
+              articles.map(i => {
+                return <ListItem i={i} key={i.id} />
+              })
+            }
+            {
+              data.map((artciles, index) => {
+                return artciles.map(i => <ListItem i={i} key={i.id} />)
+              })
+            }
+            <Button variant="outlined" color="primary" onClick={() => { setShouldFetch(true) }}>
+              Load More
+            </Button>
+          </>
         )}
       </DivIndex>
     </>

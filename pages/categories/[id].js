@@ -63,7 +63,9 @@ export default function Category({ params, category }) {
                 </div>
               )
             })
-          : data.articles.map(i => <ListItem i={i} key={i.id} />)}
+          : data.articles
+            .map((val, index, array) => array[array.length - 1 - index])
+            .map(i => <ListItem i={i} key={i.id} />)}
       </DivCategories>
     </>
   )
