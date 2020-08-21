@@ -4,6 +4,8 @@ import { CommentCount } from 'disqus-react'
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 
+import ProgressiveImage from './article/markdown/ProgressiveImage'
+
 export default function ListItem({ i }) {
   const [ isCategories, setIsCategories ] = useState(true)
 
@@ -19,8 +21,9 @@ export default function ListItem({ i }) {
     <Link href="/articles/[id]" as={`/articles/${i.id}`} key={i.id}>
       <StyledLink>
         <div>
-          <img
-            src={`http://localhost:1337${i.image[0].formats.small.url}`}
+          <ProgressiveImage
+            preview={`http://localhost:1337${i.image[0].formats.thumbnail.url}`}
+            image={`http://localhost:1337${i.image[0].formats.small.url}`}
             alt={i.image[0].alternativeText}
           />
           <h1>{i.title}</h1>

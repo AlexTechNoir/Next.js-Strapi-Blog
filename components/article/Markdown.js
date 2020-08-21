@@ -1,6 +1,8 @@
 import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
 
+import ProgressiveImage from './markdown/ProgressiveImage'
+
 export default function Markdown({ data }) {
   return (
     <>
@@ -14,7 +16,11 @@ export default function Markdown({ data }) {
         </span>
       </Header>
       <Figure>
-        <img src={`http://localhost:1337${data.image[0].url}`} alt={data.image[0].alternativeText} />
+        <ProgressiveImage
+          preview={`http://localhost:1337${data.image[0].formats.thumbnail.url}`}
+          image={`http://localhost:1337${data.image[0].url}`}
+          alt={data.image[0].alternativeText}
+        />
         <figcaption><em>{data.image[0].caption}</em></figcaption>
       </Figure>
       <ReactMarkdown

@@ -1,9 +1,10 @@
 import useSWR from 'swr'
 import styled from 'styled-components'
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
 
 import Markdown from '../../components/article/Markdown'
-import DisqusComments from '../../components/article/DisqusComments'
+const DisqusComments = dynamic(() => import('../../components/article/DisqusComments'))
 
 const fetcher = url => fetch(url).then(r => r.json())
 
@@ -65,8 +66,7 @@ const DivArticle = styled.article`
       display: block;
       margin-left: auto;
       margin-right: auto;
-      width: 100%;
-      max-width: 1200px;
+      max-width: 100%;
     }
   }
   > ul, ol {
