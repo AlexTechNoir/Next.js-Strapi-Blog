@@ -122,4 +122,14 @@ const SearchBar = styled.form`
   > :nth-child(2) {
     margin-top: .5em;
   }
+
+  @media only screen and (min-width: 768px) {
+    > :first-child {
+      width: 150px !important;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    margin-left: 8.5em;
+  }
 `

@@ -23,7 +23,7 @@ export default function ListItem({ i }) {
         <div>
           <ProgressiveImage
             preview={`http://localhost:1337${i.image[0].formats.thumbnail.url}`}
-            image={`http://localhost:1337${i.image[0].formats.small.url}`}
+            image={`http://localhost:1337${i.image[0].formats.large.url}`}
             alt={i.image[0].alternativeText}
           />
           <h1>{i.title}</h1>
@@ -74,6 +74,7 @@ const StyledLink = styled.a`
   > div {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     border-radius: 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
     transform: translateY(0);
@@ -105,6 +106,18 @@ const StyledLink = styled.a`
       display: flex;
       justify-content: space-between;
       margin: 1em;
+      > time {
+        text-align: right;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    min-width: 100%;
+    max-width: 100%;
+    > div > img {
+      min-width: 100%;
+      max-width: 100%;
     }
   }
 `

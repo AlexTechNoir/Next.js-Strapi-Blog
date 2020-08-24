@@ -28,7 +28,7 @@ export default function Category({ params, category }) {
   const initialData = category
   const { data } = useSWR(`http://localhost:1337/categories/${params.id}`, fetcher, { initialData })
 
-  const skeletonArr = [ 1, 2 ]
+  const skeletonArr = [ 1, 2, 3 ]
 
   return (
     <>
@@ -51,21 +51,23 @@ export default function Category({ params, category }) {
             /> 
           category:
         </span>
-        {!data
-          ? skeletonArr.map(i => {
-              return (
-                <div key={i}>
-                  <Skeleton variant="rect" height={150} animation="wave" />
-                  <Typography variant="h1">
+        <div>
+          {!data
+            ? skeletonArr.map(i => {
+                return (
+                  <div key={i}>
+                    <Skeleton variant="rect" height={150} animation="wave" />
+                    <Typography variant="h1">
+                      <Skeleton animation="wave" />
+                    </Typography>
                     <Skeleton animation="wave" />
-                  </Typography>
-                  <Skeleton animation="wave" />
-                </div>
-              )
-            })
-          : data.articles
-            .map((val, index, array) => array[array.length - 1 - index])
-            .map(i => <ListItem i={i} key={i.id} />)}
+                  </div>
+                )
+              })
+            : data.articles
+              .map((val, index, array) => array[array.length - 1 - index])
+              .map(i => <ListItem i={i} key={i.id} />)}
+        </div>
       </DivCategories>
     </>
   )
@@ -81,5 +83,33 @@ const DivCategories = styled.div`
     > div {
       margin: 0 .5em 0 .5em;
     }
+  }
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 1em 0 1em;
+    > div {
+      width: 100%;
+      min-width: 285px;
+      max-width: 425px;
+      margin-bottom: 2em;
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    > div {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 300px);
+      grid-row-gap: 1em;
+      grid-column-gap: 1em;
+      justify-content: center;
+      align-items: start;
+    }
+  }
+
+  @media only screen and (min-width: 1248px) {
+    grid-area: 2 / 2 / 3 / 3;
   }
 `

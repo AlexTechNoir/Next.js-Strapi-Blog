@@ -78,4 +78,8 @@ const DivArticle = styled.article`
     padding-left: 1em;
     align-self: start;
   }
+
+  @media only screen and (min-width: 1248px) {
+    grid-area: 2 / 2 / 3 / 3;
+  }
 `

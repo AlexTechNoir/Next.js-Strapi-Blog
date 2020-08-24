@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
-import useSWR from 'swr'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -11,14 +10,11 @@ import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import Chip from '@material-ui/core/Chip'
 
-const fetcher = url => fetch(url).then(r => r.json())
-
-export default function Menu({ isMenuOpen, setIsMenuOpen }) {
-  const { data, error } = useSWR('http://localhost:1337/categories', fetcher)
+export default function HamburgerMenu({ isMenuOpen, setIsMenuOpen, data, error }) {
   const [ isSublistOpen, setIsSublistOpen ] = useState(false)
 
   return (
-    <DivMenu>
+    <DivHamburgerMenu>
       <div
         className={`button ${!isMenuOpen ? "" : "opened"}`}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -66,18 +62,17 @@ export default function Menu({ isMenuOpen, setIsMenuOpen }) {
           <Link href="/about">
             <a onClick={() => setIsMenuOpen(false)}>
               <ListItem button>
-                <ListItemText primary="About" />
+                <ListItemText primary="About Me" />
               </ListItem>
             </a>
           </Link>
         </List>
       </div>
-    </DivMenu>
+    </DivHamburgerMenu>
   )
 }
 
-const DivMenu = styled.div`
-  z-index: 1;
+const DivHamburgerMenu = styled.div`
   > .button {
     margin-right: 1em;
     display: flex;

@@ -56,9 +56,12 @@ export default function SearchResults() {
 
 const DivSearchResults = styled.div`
   grid-area: 2 / 1 / 3 / 2;
+  justify-self: center;
   display: flex;
   flex-direction: column;
   padding: 1em;
+  width: 100%;
+  max-width: 768px;
   > :first-child {
     margin-bottom: 1em;
   }
@@ -70,5 +73,9 @@ const DivSearchResults = styled.div`
     > :last-child {
       width: 100%;
     }
+  }
+  
+  @media only screen and (min-width: 1248px) {
+    grid-area: 2 / 2 / 3 / 3;
   }
 `

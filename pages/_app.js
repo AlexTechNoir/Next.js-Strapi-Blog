@@ -46,4 +46,8 @@ const DivGrid = styled.div`
   grid-template-columns: 100%;
   height: 100%;
   position: relative;
+
+  @media only screen and (min-width: 1248px) {
+    grid-template-columns: 1fr 1200px 1fr;
+  }
 `

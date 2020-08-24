@@ -12,11 +12,11 @@ const fetcher = url => fetch(url).then(r => r.json())
 
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null
-  return `http://localhost:1337/articles?_sort=created_at:DESC&_start=${(pageIndex + 1) * 2}&_limit=2`
+  return `http://localhost:1337/articles?_sort=created_at:DESC&_start=${(pageIndex + 1) * 2}&_limit=4`
 }
 
 export async function getStaticProps() {
-  const articles = await fetcher(`http://localhost:1337/articles?_sort=created_at:DESC&_start=0&_limit=2`)
+  const articles = await fetcher(`http://localhost:1337/articles?_sort=created_at:DESC&_start=0&_limit=4`)
 
   return {
     props: { articles }
@@ -27,7 +27,7 @@ export default function Home({ articles }) {
   const [ shouldFetch, setShouldFetch ] = useState(false)
   const { data, error, size, setSize } = useSWRInfinite(shouldFetch ? getKey : null, fetcher, { initialData: [[]] })
 
-  const skeletonArr = [ 1, 2 ]
+  const skeletonArr = [ 1, 2, 3 ]
 
   useEffect(() => {
     if (shouldFetch) {
@@ -104,6 +104,52 @@ const DivIndex = styled.div`
     }
     > :last-child {
       margin: 0 .6em .6em .6em;
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 320px);
+    grid-row-gap: .5em;
+    grid-column-gap: 2em;
+    justify-content: center;
+    align-items: start;
+    padding: 2em 2em 0 2em;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    grid-template-columns: repeat(auto-fit, 425px);
+  }
+
+  @media only screen and (min-width: 1248px) {
+    grid-area: 2 / 2 / 3 / 3;
+    grid-template-columns: repeat(auto-fit, 300px);
+    grid-row-gap: 1em;
+    grid-column-gap: 1em;
+    justify-content: center;
+    align-items: start;
+    padding: 2em 0 0 0;
+    > div {
+      max-width: 100%;
+    }
+    > :first-child {
+      grid-area: 1 / 1 / 3 / 4;
+      align-self: stretch;
+      > div {
+        height: 100%;
+      }
+    }
+    > :nth-child(2) {
+      grid-area: 1 / 4 / 2 / 5;
+      > div > h1 {
+        font-size: 1.8em;
+      }
+    }
+    > :nth-child(3) {
+      grid-area: 2 / 4 / 3 / 5;
+      > div > h1 {
+        font-size: 1.8em;
+      }
     }
   }
 `
