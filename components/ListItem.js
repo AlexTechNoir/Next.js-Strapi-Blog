@@ -19,7 +19,7 @@ export default function ListItem({ i }) {
 
   return (
     <Link href="/articles/[id]" as={`/articles/${i.id}`} key={i.id}>
-      <StyledLink>
+      <StyledLink className="listItem">
         <div>
           <ProgressiveImage
             preview={`http://localhost:1337${i.image[0].formats.thumbnail.url}`}
@@ -88,6 +88,7 @@ const StyledLink = styled.a`
       min-width: 320px;
       max-width: 425px;
       height: auto;
+      border-radius: 15px;
     }
     > h1 {
       margin: .5em .5em 0 .5em;

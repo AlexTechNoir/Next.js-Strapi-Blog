@@ -48,7 +48,7 @@ const Header = styled.header`
 
 const Figure = styled.figure`
   margin: 0;
-  > picture {
+  > img {
     width: 100%;
     max-width: 1200px;
   }

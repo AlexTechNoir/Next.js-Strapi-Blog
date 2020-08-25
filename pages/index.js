@@ -69,7 +69,12 @@ export default function Home({ articles }) {
                 return artciles.map(i => <ListItem i={i} key={i.id} />)
               })
             }
-            <Button variant="outlined" color="primary" onClick={() => { setShouldFetch(true) }}>
+            <Button 
+              variant="outlined" 
+              color="primary" 
+              onClick={() => { setShouldFetch(true) }} 
+              className="loadMoreBtton"
+            >
               Load More
             </Button>
           </>

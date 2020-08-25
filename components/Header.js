@@ -9,7 +9,7 @@ import UsualMenu from './header/UsualMenu'
 
 const fetcher = url => fetch(url).then(r => r.json())
 
-export default function Header() {
+export default function Header({ isDarkModeOn }) {
   const { data, error } = useSWR('http://localhost:1337/categories', fetcher)
   const [ isMenuOpen, setIsMenuOpen ] = useState(false)
 
@@ -24,6 +24,7 @@ export default function Header() {
             setIsMenuOpen={setIsMenuOpen} 
             data={data} 
             error={error}
+            isDarkModeOn={isDarkModeOn}
           />
         </div>
         <div className="hamburgerMenu">

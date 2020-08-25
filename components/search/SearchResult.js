@@ -78,7 +78,7 @@ export default function SearchResult({ value, result }) {
 
   return (
     <Link href="/articles/[id]" as={`/articles/${id}`}>
-      <StyledLink>
+      <StyledLink className="searchResult">
         <div>
           <img
             src={`http://localhost:1337${image[0].formats.thumbnail.url}`}
@@ -102,7 +102,7 @@ export default function SearchResult({ value, result }) {
   )
 }
 
-const StyledLink = styled.div`
+const StyledLink = styled.a`
   text-decoration: none;
   cursor: pointer;
   &:hover {

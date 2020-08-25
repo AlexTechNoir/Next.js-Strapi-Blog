@@ -48,6 +48,7 @@ export default function Category({ params, category }) {
               variant="outlined"
               color="primary"
               size="small"
+              className="category"
             /> 
           category:
         </span>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
 import List from '@material-ui/core/List'
@@ -9,19 +9,24 @@ import ListSubheader from '@material-ui/core/ListSubheader'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import Chip from '@material-ui/core/Chip'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMoon } from '@fortawesome/free-solid-svg-icons'
+import { faSun } from '@fortawesome/free-regular-svg-icons'
+import Context from '../../context'
 
 export default function HamburgerMenu({ isMenuOpen, setIsMenuOpen, data, error }) {
+  const { isDarkModeOn, toggleColorMode } = useContext(Context)
   const [ isSublistOpen, setIsSublistOpen ] = useState(false)
 
   return (
     <DivHamburgerMenu>
       <div
-        className={`button ${!isMenuOpen ? "" : "opened"}`}
+        className={`hamburgerMenuButton ${!isMenuOpen ? "" : "opened"}`}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         <div></div>
       </div>
-      <div className={`${!isMenuOpen ? "" : "visible"}`}>
+      <div className={`menu ${!isMenuOpen ? "" : "visible"}`}>
         <List
           component="nav"
           aria-labelledby="nested-list-subheader"
@@ -62,10 +67,24 @@ export default function HamburgerMenu({ isMenuOpen, setIsMenuOpen, data, error }
           <Link href="/about">
             <a onClick={() => setIsMenuOpen(false)}>
               <ListItem button>
-                <ListItemText primary="About Me" />
+                <ListItemText primary="About me" />
               </ListItem>
             </a>
           </Link>
+          <ListItem 
+            button 
+            onClick={e => toggleColorMode(e)} 
+            id={`${isDarkModeOn ? 'swithToLightMode' : 'swithToDarkMode'}`}
+          >
+            {
+              isDarkModeOn ? (
+                <FontAwesomeIcon icon={faMoon} size="lg" />
+              ) : (
+                <FontAwesomeIcon icon={faSun} size="lg" />
+              )
+            }  
+            <ListItemText primary={`Dark mode: ${isDarkModeOn ? 'on' : 'off'}`} />      
+          </ListItem>
         </List>
       </div>
     </DivHamburgerMenu>
@@ -73,7 +92,7 @@ export default function HamburgerMenu({ isMenuOpen, setIsMenuOpen, data, error }
 }
 
 const DivHamburgerMenu = styled.div`
-  > .button {
+  > .hamburgerMenuButton {
     margin-right: 1em;
     display: flex;
     justify-content: center;
@@ -125,6 +144,9 @@ const DivHamburgerMenu = styled.div`
     width: 100%;
     height: 0;
     transition: height .3s;
+    > nav > :last-child > svg {
+      margin-right: 1em;
+    }
   }
   > .visible {
     height: 100%;
