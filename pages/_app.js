@@ -10,8 +10,17 @@ import Footer from '../components/Footer'
 
 export default function MyApp({ Component, pageProps }) { 
   const [ isDarkModeOn, setIsDarkModeOn ] = useState(false)
+  const [ isSoundOn, setIsSoundOn ] = useState(true)
 
   useEffect(() => {
+    if (localStorage.getItem("userSelectedSoundOption") !== null) {
+      if (localStorage.getItem("userSelectedSoundOption") === "off") {
+        setIsSoundOn(false)
+      } else {
+        setIsSoundOn(true)
+      }
+    }
+
     if (localStorage.getItem("userSelectedColorMode") !== null) {
       if (localStorage.getItem("userSelectedColorMode") === "dark") {
         setIsDarkModeOn(true)
@@ -33,16 +42,37 @@ export default function MyApp({ Component, pageProps }) {
     if (e.currentTarget.id === 'swithToDarkMode') {
       setIsDarkModeOn(true)
       localStorage.setItem('userSelectedColorMode', 'dark')
+      if (isSoundOn) {
+        new Audio('/audio/switchOff.mp3').play()
+      }      
     } else if (e.currentTarget.id === 'swithToLightMode') {
       setIsDarkModeOn(false)
       localStorage.setItem('userSelectedColorMode', 'light')
+      if (isSoundOn) {
+        new Audio('/audio/switchOn.mp3').play()
+      }      
+    }
+  }
+
+  const toggleSound = e => {
+    if (e.currentTarget.id === 'switchSoundOn') {
+      setIsSoundOn(true)
+      localStorage.setItem('userSelectedSoundOption', 'on')
+    } else if (e.currentTarget.id === 'switchSoundOff') {
+      setIsSoundOn(false)
+      localStorage.setItem('userSelectedSoundOption', 'off')
+      if (isSoundOn) {
+        new Audio('/audio/switchOff.mp3').play()
+      }
     }
   }
 
   return (
     <Context.Provider value={{
       isDarkModeOn,       
-      toggleColorMode
+      toggleColorMode,
+      isSoundOn,
+      toggleSound
     }}>
       <GlobalStyle />
       <DivGrid className={isDarkModeOn ? 'darkMode' : ''}>
@@ -100,7 +130,7 @@ const GlobalStyle = createGlobalStyle`
 
     form, 
     .categories, 
-    .loadMoreBtton, 
+    .loadMoreButton, 
     .dropDownMenuList, 
     .hamburgerMenuButton,
     .menu,
@@ -111,7 +141,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     img:not(.logo) {
-      transition: opacity 0.3s !important;
+      transition: opacity 0.3s, filter 0.5s linear !important;
       opacity: 0.6;
       &:hover {
         opacity: 1;

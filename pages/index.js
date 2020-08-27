@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { useSWRInfinite } from 'swr'
 import Skeleton from '@material-ui/lab/Skeleton'
 import Typography from '@material-ui/core/Typography'
-import { useState, useEffect } from 'react'
 import Button from '@material-ui/core/Button'
 
 import ListItem from '../components/ListItem'
@@ -12,11 +11,11 @@ const fetcher = url => fetch(url).then(r => r.json())
 
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null
-  return `http://localhost:1337/articles?_sort=created_at:DESC&_start=${(pageIndex + 1) * 2}&_limit=4`
+  return `http://localhost:1337/articles?_sort=created_at:DESC&_start=${pageIndex + 7}&_limit=1`
 }
 
 export async function getStaticProps() {
-  const articles = await fetcher(`http://localhost:1337/articles?_sort=created_at:DESC&_start=0&_limit=4`)
+  const articles = await fetcher(`http://localhost:1337/articles?_sort=created_at:DESC&_start=0&_limit=7`)
 
   return {
     props: { articles }
@@ -24,16 +23,15 @@ export async function getStaticProps() {
 }
 
 export default function Home({ articles }) {
-  const [ shouldFetch, setShouldFetch ] = useState(false)
-  const { data, error, size, setSize } = useSWRInfinite(shouldFetch ? getKey : null, fetcher, { initialData: [[]] })
+  const { data, error, size, setSize } = useSWRInfinite(getKey, fetcher, {
+    initialSize: 0,
+    revalidateAll: true
+  })
+
+  const isEmpty = data?.[0]?.length === 0
+  const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < 1)
 
   const skeletonArr = [ 1, 2, 3 ]
-
-  useEffect(() => {
-    if (shouldFetch) {
-      setSize(size + 1)
-    }
-  }, [shouldFetch])
 
   return (
     <>
@@ -43,7 +41,7 @@ export default function Home({ articles }) {
       </Head>
 
       <DivIndex>
-        {!data && !articles ? (
+        {!articles ? (
           skeletonArr.map(i => {
             return (
               <div key={i}>
@@ -65,18 +63,24 @@ export default function Home({ articles }) {
               })
             }
             {
-              data.map((artciles, index) => {
-                return artciles.map(i => <ListItem i={i} key={i.id} />)
-              })
+              data !== undefined ? (
+                data.map((artciles, index) => {
+                  return artciles.map(i => <ListItem i={i} key={i.id} />)
+                })
+              ) : null
             }
-            <Button 
-              variant="outlined" 
-              color="primary" 
-              onClick={() => { setShouldFetch(true) }} 
-              className="loadMoreBtton"
-            >
-              Load More
-            </Button>
+            {
+              !isReachingEnd ? (
+                <Button 
+                  variant="outlined" 
+                  color="primary" 
+                  onClick={() => setSize(size + 4)} 
+                  className="loadMoreButton"
+                >
+                  Load More
+                </Button>
+              ) : null
+            }
           </>
         )}
       </DivIndex>
@@ -111,6 +115,9 @@ const DivIndex = styled.div`
       margin: 0 .6em .6em .6em;
     }
   }
+  > .loadMoreButton {
+    width: 300px;
+  }
 
   @media only screen and (min-width: 768px) {
     display: grid;
@@ -120,15 +127,22 @@ const DivIndex = styled.div`
     justify-content: center;
     align-items: start;
     padding: 2em 2em 0 2em;
+    > .loadMoreButton {
+      justify-self: center;
+    }
   }
 
   @media only screen and (min-width: 1024px) {
     grid-template-columns: repeat(auto-fit, 425px);
+    > .loadMoreButton {
+      grid-column: span 1;
+      justify-self: center;
+    }
   }
 
   @media only screen and (min-width: 1248px) {
     grid-area: 2 / 2 / 3 / 3;
-    grid-template-columns: repeat(auto-fit, 300px);
+    grid-template-columns: repeat(auto-fit, 288px);
     grid-row-gap: 1em;
     grid-column-gap: 1em;
     justify-content: center;
@@ -155,6 +169,10 @@ const DivIndex = styled.div`
       > div > h1 {
         font-size: 1.8em;
       }
+    }
+    > .loadMoreButton {
+      grid-column: span 4;
+      justify-self: center;
     }
   }
 `

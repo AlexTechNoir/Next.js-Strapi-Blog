@@ -20,7 +20,10 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const article = await fetcher(`http://localhost:1337/articles/${params.id}`)
 
-  return { props: { params, article }}
+  return { 
+    props: { params, article }, 
+    revalidate: 1
+  }
 }
 
 export default function Article({ params, article }) {
@@ -77,6 +80,7 @@ const DivArticle = styled.article`
     border-left: 5px solid #BBAB92;
     padding-left: 1em;
     align-self: start;
+    font-style: italic;
   }
 
   @media only screen and (min-width: 1248px) {

@@ -6,13 +6,13 @@ import Chip from '@material-ui/core/Chip'
 import styled from 'styled-components'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMoon } from '@fortawesome/free-solid-svg-icons'
+import { faMoon, faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons'
 import { faSun } from '@fortawesome/free-regular-svg-icons'
 import Context from '../../context'
 import { useContext } from 'react'
 
 export default function UsualMenu({ isMenuOpen, setIsMenuOpen, data, error }) {
-  const { isDarkModeOn, toggleColorMode } = useContext(Context)
+  const { isDarkModeOn, toggleColorMode, isSoundOn, toggleSound } = useContext(Context)
   
   return (
     <ListUsualMenu component="nav" aria-label="secondary mailbox folders">
@@ -52,8 +52,23 @@ export default function UsualMenu({ isMenuOpen, setIsMenuOpen, data, error }) {
       </Link>
       <ListItem 
         button 
+        onClick={e => toggleSound(e)}
+        id={`${isSoundOn ? 'switchSoundOff' : 'switchSoundOn'}`}
+        aria-label={`Press to ${isSoundOn ? 'switch sound off' : 'switch sound on'}`}
+      >
+        {
+          isSoundOn ? (
+            <FontAwesomeIcon icon={faVolumeUp} size="lg" />
+          ) : (
+            <FontAwesomeIcon icon={faVolumeMute} size="lg" />
+          )
+        }        
+      </ListItem>
+      <ListItem 
+        button 
         onClick={e => toggleColorMode(e)} 
         id={`${isDarkModeOn ? 'swithToLightMode' : 'swithToDarkMode'}`}
+        aria-label={`Press to ${isDarkModeOn ? 'switch to light mode' : 'switch to dark mode'}`}
       >
         {
           isDarkModeOn ? (
@@ -88,6 +103,9 @@ const ListUsualMenu = styled(List)`
     > div > div {
       cursor: pointer;
     }
+  }
+  > :nth-child(3) {
+    border-radius: 30px;
   }
   > :last-child {
     border-radius: 30px;

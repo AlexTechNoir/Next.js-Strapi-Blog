@@ -100,7 +100,7 @@ const StyledLink = styled.a`
       margin: 1em 1em 0 1em;
       > div {
         cursor: pointer !important;
-        margin-right: .2em;
+        margin: 0 .2em .2em 0;
       }
     }
     > .commentCount {

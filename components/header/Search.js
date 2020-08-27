@@ -130,6 +130,6 @@ const SearchBar = styled.form`
   }
 
   @media only screen and (min-width: 1024px) {
-    margin-left: 8.5em;
+    margin-left: 275px;
   }
 `

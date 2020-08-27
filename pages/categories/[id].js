@@ -21,7 +21,10 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const category = await fetcher(`http://localhost:1337/categories/${params.id}`)
 
-  return { props: { params, category }}
+  return { 
+    props: { params, category }, 
+    revalidate: 1
+  }
 }
 
 export default function Category({ params, category }) {

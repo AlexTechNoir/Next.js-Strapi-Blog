@@ -10,12 +10,12 @@ import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import Chip from '@material-ui/core/Chip'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMoon } from '@fortawesome/free-solid-svg-icons'
+import { faMoon, faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons'
 import { faSun } from '@fortawesome/free-regular-svg-icons'
 import Context from '../../context'
 
 export default function HamburgerMenu({ isMenuOpen, setIsMenuOpen, data, error }) {
-  const { isDarkModeOn, toggleColorMode } = useContext(Context)
+  const { isDarkModeOn, toggleColorMode, isSoundOn, toggleSound } = useContext(Context)
   const [ isSublistOpen, setIsSublistOpen ] = useState(false)
 
   return (
@@ -71,6 +71,20 @@ export default function HamburgerMenu({ isMenuOpen, setIsMenuOpen, data, error }
               </ListItem>
             </a>
           </Link>
+          <ListItem 
+            button 
+            onClick={e => toggleSound(e)}
+            id={`${isSoundOn ? 'switchSoundOff' : 'switchSoundOn'}`}
+          >
+            {
+              isSoundOn ? (
+                <FontAwesomeIcon icon={faVolumeUp} size="lg" />
+              ) : (
+                <FontAwesomeIcon icon={faVolumeMute} size="lg" />
+              )
+            }
+            <ListItemText primary={`Sound: ${isSoundOn ? 'on' : 'off'}`} />     
+          </ListItem>
           <ListItem 
             button 
             onClick={e => toggleColorMode(e)} 
@@ -144,6 +158,9 @@ const DivHamburgerMenu = styled.div`
     width: 100%;
     height: 0;
     transition: height .3s;
+    > nav > :nth-child(4) > svg {
+      margin-right: 1em;
+    }
     > nav > :last-child > svg {
       margin-right: 1em;
     }
