@@ -18,7 +18,7 @@ export default function About() {
           Hi! My name is Alex!
           <br /> 
           <br />
-          I'm learning webdev for more than 1.5 years and I'm almost finished! I'll be a freelancer very soon! I made this website for my portfolio.
+          I'm learning webdev for more than 1.5 years now! I've made this website for my portfolio.
           <br /> 
           <br />
           I'm not really creative, so here's the Lorem Ipsum text.

@@ -10,7 +10,7 @@ import SearchResult from '../../components/search/SearchResult'
 const fetcher = url => fetch(url).then(r => r.json())
 
 export default function SearchResults() {
-  const { data, error } = useSWR('http://localhost:1337/articles', fetcher)
+  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_HCMS_API_URL}/articles`, fetcher)
 
   const router = useRouter()
   const { asPath } = router

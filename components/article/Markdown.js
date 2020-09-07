@@ -8,7 +8,7 @@ export default function Markdown({ data }) {
     <>
       <Header>
         <h1>{data.title}</h1>
-        <time dateTime={`${data.published_at.slice(0, 10)}`}>
+        <time dateTime={data.published_at.slice(0, 10)}>
           {new Date(data.published_at).toDateString().slice(4)}
         </time>
         <span>
@@ -17,16 +17,17 @@ export default function Markdown({ data }) {
       </Header>
       <Figure>
         <ProgressiveImage
-          preview={`http://localhost:1337${data.image[0].formats.thumbnail.url}`}
-          image={`http://localhost:1337${data.image[0].url}`}
+          preview={data.image[0].formats.thumbnail.url}
+          image={data.image[0].url}
           alt={data.image[0].alternativeText}
         />
         <figcaption><em>{data.image[0].caption}</em></figcaption>
       </Figure>
       <ReactMarkdown
         source={data.content}
+        escapeHtml={false}
         transformImageUri={uri =>
-          uri.startsWith('http') ? uri : `http://localhost:1337${uri}`
+          uri.startsWith('http') ? uri : `${process.env.NEXT_PUBLIC_HCMS_API_URL}${uri}`
         }
       />
     </>

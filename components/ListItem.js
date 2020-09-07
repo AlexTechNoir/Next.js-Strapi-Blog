@@ -22,8 +22,8 @@ export default function ListItem({ i }) {
       <StyledLink className="listItem">
         <div>
           <ProgressiveImage
-            preview={`http://localhost:1337${i.image[0].formats.thumbnail.url}`}
-            image={`http://localhost:1337${i.image[0].formats.large.url}`}
+            preview={i.image[0].formats.thumbnail.url}
+            image={i.image[0].formats.large.url}
             alt={i.image[0].alternativeText}
           />
           <h1>{i.title}</h1>

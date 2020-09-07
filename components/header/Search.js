@@ -39,7 +39,7 @@ export default function Search() {
     }
 
     (async () => {
-      const res = await fetch('http://localhost:1337/articles')
+      const res = await fetch(`${process.env.NEXT_PUBLIC_HCMS_API_URL}/articles`)
       await sleep(1000)
       const articles = await res.json()
 

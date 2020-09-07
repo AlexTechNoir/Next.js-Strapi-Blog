@@ -9,7 +9,7 @@ const DisqusComments = dynamic(() => import('../../components/article/DisqusComm
 const fetcher = url => fetch(url).then(r => r.json())
 
 export async function getStaticPaths() {
-  const articles = await fetcher('http://localhost:1337/articles')
+  const articles = await fetcher(`${process.env.NEXT_PUBLIC_HCMS_API_URL}/articles`)
   const paths = articles.map(article => ({
     params: { id: article.id.toString() }
   }))
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const article = await fetcher(`http://localhost:1337/articles/${params.id}`)
+  const article = await fetcher(`${process.env.NEXT_PUBLIC_HCMS_API_URL}/articles/${params.id}`)
 
   return { 
     props: { params, article }, 
@@ -28,7 +28,7 @@ export async function getStaticProps({ params }) {
 
 export default function Article({ params, article }) {
   const initialData = article
-  const { data } = useSWR(`http://localhost:1337/articles/${params.id}`, fetcher, { initialData })
+  const { data } = useSWR(`${process.env.NEXT_PUBLIC_HCMS_API_URL}/articles/${params.id}`, fetcher, { initialData })
   
   return (
     <>

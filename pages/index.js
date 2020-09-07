@@ -11,11 +11,11 @@ const fetcher = url => fetch(url).then(r => r.json())
 
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null
-  return `http://localhost:1337/articles?_sort=created_at:DESC&_start=${pageIndex + 7}&_limit=1`
+  return `${process.env.NEXT_PUBLIC_HCMS_API_URL}/articles?_sort=published_at:DESC&_start=${pageIndex + 7}&_limit=1`
 }
 
 export async function getStaticProps() {
-  const articles = await fetcher(`http://localhost:1337/articles?_sort=created_at:DESC&_start=0&_limit=7`)
+  const articles = await fetcher(`${process.env.NEXT_PUBLIC_HCMS_API_URL}/articles?_sort=published_at:DESC&_start=0&_limit=7`)
 
   return {
     props: { articles }

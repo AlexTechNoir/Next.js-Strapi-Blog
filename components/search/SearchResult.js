@@ -81,8 +81,8 @@ export default function SearchResult({ value, result }) {
       <StyledLink className="searchResult">
         <div>
           <img
-            src={`http://localhost:1337${image[0].formats.thumbnail.url}`}
-            alt={`http://localhost:1337${image[0].alternativeText}`}
+            src={image[0].formats.thumbnail.url}
+            alt={image[0].alternativeText}
             width="120"
             heigth="120"
           />

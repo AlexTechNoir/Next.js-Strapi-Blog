@@ -10,7 +10,7 @@ import ListItem from '../../components/ListItem'
 const fetcher = url => fetch(url).then(r => r.json())
 
 export async function getStaticPaths() {
-  const categories = await fetcher('http://localhost:1337/categories')
+  const categories = await fetcher(`${process.env.NEXT_PUBLIC_HCMS_API_URL}/categories`)
   const paths = categories.map(category => ({
     params: { id: category.id.toString() }
   }))
@@ -19,7 +19,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const category = await fetcher(`http://localhost:1337/categories/${params.id}`)
+  const category = await fetcher(`${process.env.NEXT_PUBLIC_HCMS_API_URL}/categories/${params.id}`)
 
   return { 
     props: { params, category }, 
@@ -29,7 +29,7 @@ export async function getStaticProps({ params }) {
 
 export default function Category({ params, category }) {
   const initialData = category
-  const { data } = useSWR(`http://localhost:1337/categories/${params.id}`, fetcher, { initialData })
+  const { data } = useSWR(`${process.env.NEXT_PUBLIC_HCMS_API_URL}/categories/${params.id}`, fetcher, { initialData })
 
   const skeletonArr = [ 1, 2, 3 ]
 

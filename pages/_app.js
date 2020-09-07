@@ -13,16 +13,16 @@ export default function MyApp({ Component, pageProps }) {
   const [ isSoundOn, setIsSoundOn ] = useState(true)
 
   useEffect(() => {
-    if (localStorage.getItem("userSelectedSoundOption") !== null) {
-      if (localStorage.getItem("userSelectedSoundOption") === "off") {
+    if (localStorage.getItem('userSelectedSoundOption') !== null) {
+      if (localStorage.getItem('userSelectedSoundOption') === 'off') {
         setIsSoundOn(false)
       } else {
         setIsSoundOn(true)
       }
     }
 
-    if (localStorage.getItem("userSelectedColorMode") !== null) {
-      if (localStorage.getItem("userSelectedColorMode") === "dark") {
+    if (localStorage.getItem('userSelectedColorMode') !== null) {
+      if (localStorage.getItem('userSelectedColorMode') === 'dark') {
         setIsDarkModeOn(true)
       } else {
         setIsDarkModeOn(false)
@@ -30,8 +30,8 @@ export default function MyApp({ Component, pageProps }) {
     } else {
       if (
         window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme)").media !== "not all" &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
+        window.matchMedia('(prefers-color-scheme)').media !== 'not all' &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
       ) {
         setIsDarkModeOn(true)
       }
