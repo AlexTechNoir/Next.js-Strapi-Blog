@@ -29,7 +29,7 @@ export default function ListItem({ i }) {
           <h1>{i.title}</h1>
           {isCategories ? null : (
             <div className="categories">
-              {i.categories.map(category => {
+              {i.categories.map((category) => {
                 return (
                   <Chip
                     label={category.name}
@@ -38,7 +38,7 @@ export default function ListItem({ i }) {
                     size="small"
                     key={category.id}
                   />
-                )
+                );
               })}
             </div>
           )}
@@ -46,7 +46,11 @@ export default function ListItem({ i }) {
             <CommentCount
               shortname="youknowwhatblog"
               config={{
-                url: `http://localhost:3000/articles/${i.id}`,
+                url: `${
+                  process.env.NODE_ENV === "production"
+                    ? process.env.NEXT_PUBLIC_PROD_HOST
+                    : process.env.NEXT_PUBLIC_DEV_HOST
+                }/articles/${i.id}`,
                 identifier: `${i.id}`,
                 title: `${i.title}`
               }}
