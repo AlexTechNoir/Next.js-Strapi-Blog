@@ -3,7 +3,7 @@ import { useState } from 'react'
 import useSWR from 'swr'
 
 import Logo from './header/Logo'
-import Search from './header/Search'
+import SearchBar from './header/SearchBar'
 import HamburgerMenu from './header/HamburgerMenu'
 import UsualMenu from './header/UsualMenu'
 
@@ -16,7 +16,7 @@ export default function Header({ isDarkModeOn }) {
   return (
     <StyledHeader>
       <Logo setIsMenuOpen={setIsMenuOpen} />
-      <Search />
+      <SearchBar />
       <div>
         <div className="usualMenu">
           <UsualMenu 

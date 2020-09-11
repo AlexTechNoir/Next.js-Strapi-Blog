@@ -14,18 +14,18 @@ function sleep(delay = 0) {
   })
 }
 
-export default function Search() {
+export default function SearchBar() {
   const [ open, setOpen ] = useState(false)
   const [ options, setOptions ] = useState([])
   const loading = open && options.length === 0
-
-  const router = useRouter()
+  
+  const router = useRouter()  
   const [ searchValue, setSearchValue ] = useState('')
   const inputRef = useRef(null)
 
   useEffect(() => {
     if (location.pathname.includes('search')) {
-      inputRef.current.value = location.pathname.substr(location.pathname.lastIndexOf('/') + 1)
+      inputRef.current.value = searchValue
     } else {
       inputRef.current.value = ''
     }
@@ -63,12 +63,12 @@ export default function Search() {
   const search = e => {
     e.preventDefault()
     if (searchValue !== '') {
-      router.push(`/search/${searchValue.trim()}`)
+      router.push(`/search?searchValue=${searchValue.replace(/ +/g, ' ').trim()}`)
     } else { return null }
   }
 
   return (
-    <SearchBar onSubmit={search}>
+    <FormSearchBar onSubmit={search}>
       <Autocomplete
         id="asynchronous-demo"
         style={{ width: 300 }}
@@ -106,11 +106,11 @@ export default function Search() {
       <IconButton type="submit" aria-label="search">
         <FontAwesomeIcon icon={faSearch} size="xs" />
       </IconButton>
-    </SearchBar>
+    </FormSearchBar>
   )
 }
 
-const SearchBar = styled.form`
+const FormSearchBar = styled.form`
   margin: 0 0 .5em 0;
   display: flex;
   > :first-child {

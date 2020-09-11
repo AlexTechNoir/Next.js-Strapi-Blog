@@ -25,7 +25,7 @@ export default function SearchResult({ value, result }) {
     if (matchInArticleText) {
       const rangeAroundMatch = 20
       const initialRangeBeforeMatch = firstMatchIndex - rangeAroundMatch
-      const initialRangeAfterMatch = firstMatchIndex + 6 + value.length + 7 + rangeAroundMatch
+      const initialRangeAfterMatch = firstMatchIndex + '<mark>'.length + value.length + '</mark>'.length + rangeAroundMatch
 
       const finalRangeBeforeMatch =
         initialRangeBeforeMatch >= 0
@@ -42,6 +42,7 @@ export default function SearchResult({ value, result }) {
 
       if (oneMatchFound) {
         const newText = p.current.innerHTML.slice(finalRangeBeforeMatch, finalRangeAfterMatch)
+
         p.current.innerHTML = 
           initialRangeBeforeMatch <= 0 && initialRangeAfterMatch >= p.current.innerHTML.length
           ? newText
@@ -52,6 +53,7 @@ export default function SearchResult({ value, result }) {
           : initialRangeAfterMatch >= p.current.innerHTML.length
           ? '...' + newText
           : null
+
       } else if (moreThanOneMatchFound) {
         const amountOfMatches = p.current.innerHTML
           .toLowerCase()
@@ -74,7 +76,7 @@ export default function SearchResult({ value, result }) {
     } else if (noMatchInArticleText) {
       p.current.innerHTML = 'No matches in article text'
     }
-  }, [])
+  }, [value])
 
   return (
     <Link href="/articles/[id]" as={`/articles/${id}`}>
@@ -90,12 +92,14 @@ export default function SearchResult({ value, result }) {
             {title}
           </h2>
           <p ref={p}>
-            {
-              textFromHtml
-                .split(new RegExp(`(${value})`, 'ig'))
-                .map(i => i.match(new RegExp(`(${value})`, 'ig')) ? <mark>{i}</mark> : i)
-            }
-          </p>       
+            <span>
+              {
+                textFromHtml
+                  .split(new RegExp(`(${value})`, "ig"))
+                  .map(i => i.match(new RegExp(`(${value})`, "ig")) ? <mark>{i}</mark> : i)
+              }
+            </span>
+          </p>
         </div>
       </StyledLink>
     </Link>
