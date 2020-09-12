@@ -4,11 +4,7 @@ import styled from 'styled-components'
 export default function DisqusComments({ params, data }) {
   const disqusShortname = 'youknowwhatblog'
   const disqusConfig = {
-    url: `${
-      process.env.NODE_ENV === "production"
-        ? process.env.NEXT_PUBLIC_PROD_HOST
-        : process.env.NEXT_PUBLIC_DEV_HOST
-    }/articles/${params.id}`,
+    url: `${process.env.NEXT_PUBLIC_PROD_HOST}/articles/${params.id}`,
     identifier: `${params.id}`,
     title: `${data.title}`,
     language: "en_GB"
