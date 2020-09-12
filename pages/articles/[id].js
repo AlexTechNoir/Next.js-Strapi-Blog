@@ -1,10 +1,9 @@
 import useSWR from 'swr'
 import styled from 'styled-components'
 import Head from 'next/head'
-import dynamic from 'next/dynamic'
 
 import Markdown from '../../components/article/Markdown'
-const DisqusComments = dynamic(() => import('../../components/article/DisqusComments'))
+import Comments from '../../components/article/Comments'
 
 const fetcher = url => fetch(url).then(r => r.json())
 
@@ -39,7 +38,7 @@ export default function Article({ params, article }) {
 
       <DivArticle>
         <Markdown data={data} />
-        <DisqusComments params={params} data={data} />
+        <Comments params={params} />
       </DivArticle>
     </>
   )

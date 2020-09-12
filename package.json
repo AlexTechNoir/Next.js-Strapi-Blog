@@ -15,7 +15,6 @@
     "@material-ui/core": "^5.0.0-alpha.9",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
-    "disqus-react": "^1.0.10",
     "next": "^9.5.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
