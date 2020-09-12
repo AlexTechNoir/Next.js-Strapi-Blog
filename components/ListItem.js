@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import Chip from '@material-ui/core/Chip'
-import { CommentCount } from 'disqus-react'
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 
@@ -38,26 +37,12 @@ export default function ListItem({ i }) {
                     size="small"
                     key={category.id}
                   />
-                );
+                )
               })}
             </div>
           )}
-          <div className="commentCount">
-            <CommentCount
-              shortname="youknowwhatblog"
-              config={{
-                url: `${
-                  process.env.NODE_ENV === "production"
-                    ? process.env.NEXT_PUBLIC_PROD_HOST
-                    : process.env.NEXT_PUBLIC_DEV_HOST
-                }/articles/${i.id}`,
-                identifier: `${i.id}`,
-                title: `${i.title}`
-              }}
-            >
-              {/* Placeholder Text */}
-              Comments
-            </CommentCount>
+          <div>
+            <span className="fb-comments-count" data-href={`${process.env.NEXT_PUBLIC_PROD_HOST}/articles/${i.id}`}></span>
             <time dateTime={`${i.published_at.slice(0, 10)}`}>
               {new Date(i.published_at).toDateString().slice(4)}
             </time>
@@ -107,7 +92,7 @@ const StyledLink = styled.a`
         margin: 0 .2em .2em 0;
       }
     }
-    > .commentCount {
+    > :last-child {
       display: flex;
       justify-content: space-between;
       margin: 1em;
