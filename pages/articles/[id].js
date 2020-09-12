@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Head from 'next/head'
 
 import Markdown from '../../components/article/Markdown'
+import SocialButtons from '../../components/article/SocialButtons'
 import Comments from '../../components/article/Comments'
 
 const fetcher = url => fetch(url).then(r => r.json())
@@ -38,6 +39,7 @@ export default function Article({ params, article }) {
 
       <DivArticle>
         <Markdown data={data} />
+        <SocialButtons params={params} />
         <Comments params={params} />
       </DivArticle>
     </>

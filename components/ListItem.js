@@ -28,7 +28,7 @@ export default function ListItem({ i }) {
           <h1>{i.title}</h1>
           {isCategories ? null : (
             <div className="categories">
-              {i.categories.map((category) => {
+              {i.categories.map(category => {
                 return (
                   <Chip
                     label={category.name}
@@ -42,7 +42,13 @@ export default function ListItem({ i }) {
             </div>
           )}
           <div>
-            <span className="fb-comments-count" data-href={`${process.env.NEXT_PUBLIC_PROD_HOST}/articles/${i.id}`}></span>
+            <span>
+              <span
+                className="fb-comments-count"
+                data-href={`${process.env.NEXT_PUBLIC_PROD_HOST}/articles/${i.id}`}
+              ></span>
+              comment(s)
+            </span>
             <time dateTime={`${i.published_at.slice(0, 10)}`}>
               {new Date(i.published_at).toDateString().slice(4)}
             </time>
@@ -50,7 +56,7 @@ export default function ListItem({ i }) {
         </div>
       </StyledLink>
     </Link>
-  )
+  );
 }
 
 const StyledLink = styled.a`
