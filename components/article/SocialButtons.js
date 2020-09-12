@@ -1,8 +1,13 @@
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { useEffect } from 'react'
 
 export default function SocialButtons({ params }) {
+  useEffect(() => {
+    window.FB.XFBML.parse()
+  })
+
   return (
     <DivSocialButtons>
       <div
@@ -29,6 +34,10 @@ const DivSocialButtons = styled.div`
   display: flex;
   width: 100%;
   padding: 0 1em 0 1em;
+  align-items: center;
+  > div {
+    margin-right: .5em;
+  }
   > a {
     background: #00ACEE;
 	  border-radius: 15px;
