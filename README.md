@@ -72,3 +72,4 @@ Static demo blog. Deployed on [Netlify](https://www.netlify.com/).
 ## Notes:
 
 - at first load there is FOUC from Material-UI. MUI has [recommendations for server rendering](https://material-ui.com/guides/server-rendering/) and [example for Next.js](https://github.com/mui-org/material-ui/tree/master/examples/nextjs), however this measures doesn't work for everyone. There is fix, but it [works only in dev mode](https://github.com/vercel/next.js/issues/13058#issuecomment-666948357)
+- Facebook comment counters may be loaded slow (I guess it depends on Facebook)
