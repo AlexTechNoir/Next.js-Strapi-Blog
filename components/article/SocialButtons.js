@@ -9,7 +9,7 @@ export default function SocialButtons({ params }) {
         className="fb-like"
         data-href={`${process.env.NEXT_PUBLIC_PROD_HOST}/articles/${params.id}`}
         data-width=""
-        data-layout="standard"
+        data-layout="button_count"
         data-action="like"
         data-size="large"
         data-share="true"

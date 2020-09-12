@@ -102,6 +102,9 @@ const StyledLink = styled.a`
       display: flex;
       justify-content: space-between;
       margin: 1em;
+      > span > span {
+        margin-right: .5em;
+      }
       > time {
         text-align: right;
       }
