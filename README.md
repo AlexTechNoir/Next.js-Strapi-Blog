@@ -16,7 +16,7 @@ Static demo blog. Deployed on [Netlify](https://www.netlify.com/).
 - autocomplete search
 - search results with highlighted match (native)
 - sound
-- dark mode
+- dark mode with autodetect system preference and saved in LocalStorage
 - hamburger menu for mobile layout
 - "Load More" pagination
 - SEO-friendly article list initially fetched on server-side (paginated - client-side)
@@ -32,7 +32,7 @@ Static demo blog. Deployed on [Netlify](https://www.netlify.com/).
   <ol>
     <li>When user enters value, we <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/header/SearchBar.js#L101">grab it's changes</a>.</li>
     <li>Search happens <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/header/SearchBar.js#L71">onSubmit</a>.</li>
-    <li>It's importnant not to use Next.js's <a href="https://nextjs.org/docs/routing/dynamic-routes">dynamic routs</a> here, because blog would not be static if we'd have pages, depending on user's request (but if you're OK with hybrid/dynamic blog, than it's alright to use them (btw, maybe <a href="https://nextjs.org/docs/routing/dynamic-routes#optional-catch-all-routes">optional catch all routes</a> will somehow work with static site too, but I haven't tested it)). Instead we go to search page with query passed through "?" sign, <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/header/SearchBar.js#L66">here</a>.</li>
+    <li>It's important not to use Next.js's <a href="https://nextjs.org/docs/routing/dynamic-routes">dynamic routes</a> here, because blog would not be static if we'd have pages, depending on user's request (but if you're OK with hybrid/dynamic blog, than it's alright to use them (btw, maybe <a href="https://nextjs.org/docs/routing/dynamic-routes#optional-catch-all-routes">optional catch all routes</a> will somehow work with static site too, but I haven't tested it)). Instead we go to search page with query passed through "?" sign, <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/header/SearchBar.js#L66">here</a>.</li>
     <li>Search page will <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/search.js#L14">fetch</a> Strapi's API and will <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/search.js#L23">render</a> the filtered results based on query parameter.</li>
     <li>In search result we <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/search/SearchResult.js#L14">convert markup to html</a> and <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/search/SearchResult.js#L15">html to text</a>.</li>
     <li>We <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/search/SearchResult.js#L98">divide text into array based on value match</a> and <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/search/SearchResult.js#L99">create new text as array with "mark" tag around match</a>.</li>
@@ -71,5 +71,5 @@ Static demo blog. Deployed on [Netlify](https://www.netlify.com/).
 
 ## Notes:
 
-- at first load there is FOUC from Material-UI. MUI has [recommendations for server rendering](https://material-ui.com/guides/server-rendering/) and [example for Next.js](https://github.com/mui-org/material-ui/tree/master/examples/nextjs), however this measures doesn't work for everyone. There is fix, but it [works only in dev mode](https://github.com/vercel/next.js/issues/13058#issuecomment-666948357)
+- at first load there is FOUC from Material-UI. MUI has [recommendations for server rendering](https://material-ui.com/guides/server-rendering/) and [example for Next.js](https://github.com/mui-org/material-ui/tree/master/examples/nextjs), however this measures doesn't work for everyone. There is fix, but it [works only in dev mode](https://github.com/vercel/next.js/issues/13058#issuecomment-666948357). Upd: until this issue's fixed I use [Next.js dynamic import without SSR](https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr) on SearchBar component to avoid FOUC, [here](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/Header.js#L7).
 - Facebook comment counters may be loaded slow (I guess it depends on Facebook)

@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 import { useState } from 'react'
 import useSWR from 'swr'
+import dynamic from 'next/dynamic'
 
 import Logo from './header/Logo'
-import SearchBar from './header/SearchBar'
+const SearchBar = dynamic(() => import('./header/SearchBar'), { ssr: false })
 import HamburgerMenu from './header/HamburgerMenu'
 import UsualMenu from './header/UsualMenu'
 
