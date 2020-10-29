@@ -16,7 +16,7 @@ Static demo blog. Deployed on [Netlify](https://www.netlify.com/).
 - autocomplete search
 - search results with highlighted match (native)
 - sound
-- dark mode with autodetect system preference and saved in LocalStorage
+- dark mode with autodetect system preference and saved user's choice in LocalStorage
 - hamburger menu for mobile layout
 - "Load More" pagination
 - SEO-friendly article list initially fetched on server-side (paginated - client-side)
@@ -30,7 +30,7 @@ Static demo blog. Deployed on [Netlify](https://www.netlify.com/).
   <summary>Search with highlighted results</summary>
   <br>
   <ol>
-    <li>When user enters value, we <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/header/SearchBar.js#L101">grab it's changes</a>.</li>
+    <li>When user enters value, we <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/header/SearchBar.js#L101">grab its' changes</a>.</li>
     <li>Search happens <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/header/SearchBar.js#L71">onSubmit</a>.</li>
     <li>It's important not to use Next.js's <a href="https://nextjs.org/docs/routing/dynamic-routes">dynamic routes</a> here, because blog would not be static if we'd have pages, depending on user's request (but if you're OK with hybrid/dynamic blog, than it's alright to use them (btw, maybe <a href="https://nextjs.org/docs/routing/dynamic-routes#optional-catch-all-routes">optional catch all routes</a> will somehow work with static site too, but I haven't tested it)). Instead we go to search page with query passed through "?" sign, <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/header/SearchBar.js#L66">here</a>.</li>
     <li>Search page will <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/search.js#L14">fetch</a> Strapi's API and will <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/search.js#L23">render</a> the filtered results based on query parameter.</li>
@@ -38,7 +38,7 @@ Static demo blog. Deployed on [Netlify](https://www.netlify.com/).
     <li>We <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/search/SearchResult.js#L98">divide text into array based on value match</a> and <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/search/SearchResult.js#L99">create new text as array with "mark" tag around match</a>.</li>
     <li>Then in useEffect, initially and every time the search value gets changed, we look for "mark" tags in text and cut the text around the first match (or just write "no match" if there is no match). The namings should be self-explanatory <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/search/SearchResult.js#L19">here</a>.</li>
     <li>It's important to wrap the text inside "p" tag with, for example, <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/search/SearchResult.js#L95">"span" tag</a> to avoid React NotFoundError, which occurs when we re-render page (here: search for the second time) after manipulating the DOM (highlighting). Explained <a href="https://stackoverflow.com/a/54342788/10489004">here</a>.</li>
-    <li>Last important thing: when we search for the second time and if in search result list we got result that was in the previous list (but with different match this time) then it will reflect previous highlighted match, which is not what we want. To avoid this we must remove old results and load new when we search. We can do this by triggering <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/search.js#L35">re-fetch</a> - this will cause "isValidating" parameter to <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/search.js#L50">change</a> on every search, removing previous result with skeleton load and load new results with correct highlighted match.</li>
+    <li>Last important thing: when we search for the second time and if in search result list we got result that was in the previous list (but with different match this time) then it will reflect previous highlighted match, which is not what we want. To avoid this we must remove old results and load new when we search. We can do this by triggering <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/search.js#L35">re-fetch</a> - this will cause "isValidating" parameter to <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/search.js#L50">change</a> on every search, replacing previous results with skeleton load and then load new results with correct highlighted match.</li>
   </ol>
 </details>
 
@@ -51,7 +51,7 @@ Static demo blog. Deployed on [Netlify](https://www.netlify.com/).
     <li>We use "size" and "setSize" parameters to change page index.</li>
     <li>But instead of page index Strapi's API has <a href="https://strapi.io/documentation/v3.x/content-api/parameters.html#start">Start param</a> pointing at index from which data should be fetched and <a href="https://strapi.io/documentation/v3.x/content-api/parameters.html#limit">Limit param</a>.</li>
     <li>In getKey function <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/index.js#L12">"pageIndex" parameter</a> is the "size" parameter. It always starts with 0.</li>
-    <li>We set <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/index.js#L14">limit param to 1 (fetch 1 article), start param - to "pageIndex + 7"</a> (because first 7 artciles are already fetched on server-side.</li>
+    <li>We set <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/index.js#L14">limit param to 1 (fetch 1 article), start param - to "pageIndex + 7"</a> (because first 7 artciles are already fetched on server-side).</li>
     <li>On every time user clicks "Load More" button, we <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/index.js#L77">increase</a> size param to amount of times we need to fetch 1 artcile in one click (here we need 4, which depends on desktop layout).</li>
     <li>We also have to <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/index.js#L27">set initialSize parameter to 0</a>, because we don't need paginated data initially, only on demand.</li>
   </ol>
