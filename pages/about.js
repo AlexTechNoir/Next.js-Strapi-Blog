@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import styled from 'styled-components'
+import Image from 'next/image'
 
 export default function About() {
   return (
@@ -11,10 +12,13 @@ export default function About() {
 
       <DivAbout>
         <p>
-          <picture>
-            <source srcSet="/img/me.webp" type="image/webp" />
-            <img src="/img/me.jpg" alt="Me" />
-          </picture>
+          <Image 
+            src="/img/me.webp"
+            alt="Me"
+            width={494}
+            height={400}
+            layout="responsive"
+          />
           Hi! My name is Alex!
           <br /> 
           <br />
@@ -41,9 +45,8 @@ const DivAbout = styled.div`
     grid-area: 2 / 1 / 3 / 2;
     text-align: justify;
     text-justify: inter-word;    
-    > picture > source, img {
-      display: block;
-      margin: 0 auto 1em auto;
+    > :first-child {
+      margin: 0 auto 1em auto !important;
       float: none;
       width: 100%;
       max-width: 494px;

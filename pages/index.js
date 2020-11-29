@@ -97,7 +97,7 @@ const DivIndex = styled.div`
     display: flex;
     flex-direction: column;
     min-width: 320px;
-    max-width: 425px;
+    max-width: 896px;
     width: 100%;
     margin-bottom: 2em;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
@@ -156,6 +156,9 @@ const DivIndex = styled.div`
       align-self: stretch;
       > div {
         height: 100%;
+        > div {
+          max-width: 896px;
+        }        
       }
     }
     > :nth-child(2) {

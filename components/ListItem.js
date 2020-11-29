@@ -2,8 +2,7 @@ import Link from 'next/link'
 import Chip from '@material-ui/core/Chip'
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
-
-import ProgressiveImage from './article/markdown/ProgressiveImage'
+import Image from 'next/image'
 
 export default function ListItem({ i }) {
   const [ isCategories, setIsCategories ] = useState(true)
@@ -20,10 +19,12 @@ export default function ListItem({ i }) {
     <Link href="/articles/[id]" as={`/articles/${i.id}`} key={i.id}>
       <StyledLink className="listItem">
         <div>
-          <ProgressiveImage
-            preview={i.image[0].formats.thumbnail.url}
-            image={i.image[0].formats.large.url}
+          <Image
+            src={i.image[0].formats.large.url}
             alt={i.image[0].alternativeText}
+            width={320}
+            height={191}
+            layout="responsive"
           />
           <h1>{i.title}</h1>
           {isCategories ? null : (
@@ -56,14 +57,14 @@ export default function ListItem({ i }) {
         </div>
       </StyledLink>
     </Link>
-  );
+  )
 }
 
 const StyledLink = styled.a`
   text-decoration: none;
   margin-bottom: 2em;
   width: 100%;
-  min-width: 320px;
+  min-width: 288px;
   max-width: 425px;
   cursor: pointer;
   > div {
@@ -78,9 +79,9 @@ const StyledLink = styled.a`
     &:hover {
       transform: translateY(-5px);
     }
-    > img {
+    > :first-child {
       width: 100%;
-      min-width: 320px;
+      min-width: 288px;
       max-width: 425px;
       height: auto;
       border-radius: 15px;
@@ -114,7 +115,7 @@ const StyledLink = styled.a`
   @media only screen and (min-width: 768px) {
     min-width: 100%;
     max-width: 100%;
-    > div > img {
+    > div > div > img {
       min-width: 100%;
       max-width: 100%;
     }

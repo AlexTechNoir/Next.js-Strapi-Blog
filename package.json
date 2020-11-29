@@ -8,26 +8,26 @@
     "start": "next start"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.30",
-    "@fortawesome/free-brands-svg-icons": "^5.14.0",
-    "@fortawesome/free-regular-svg-icons": "^5.14.0",
-    "@fortawesome/free-solid-svg-icons": "^5.14.0",
-    "@fortawesome/react-fontawesome": "^0.1.11",
-    "@material-ui/core": "^5.0.0-alpha.9",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-brands-svg-icons": "^5.15.1",
+    "@fortawesome/free-regular-svg-icons": "^5.15.1",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.13",
+    "@material-ui/core": "^4.11.1",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
-    "next": "^9.5.3",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-markdown": "^4.3.1",
+    "next": "^10.0.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-markdown": "^5.0.3",
     "showdown": "^1.9.1",
-    "styled-components": "^5.2.0",
-    "swr": "^0.3.2"
+    "styled-components": "^5.2.1",
+    "swr": "^0.3.9"
   },
   "devDependencies": {
     "@zeit/next-css": "^1.0.1",
-    "babel-plugin-styled-components": "^1.11.1",
-    "css-loader": "^4.3.0",
-    "style-loader": "^1.2.1"
+    "babel-plugin-styled-components": "^1.12.0",
+    "css-loader": "^5.0.1",
+    "style-loader": "^2.0.0"
   }
 }

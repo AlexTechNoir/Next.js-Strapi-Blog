@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import showdown from 'showdown'
 import { useEffect, useRef } from 'react'
+import Image from 'next/image'
 
 export default function SearchResult({ value, result }) {
   const {
@@ -82,11 +83,12 @@ export default function SearchResult({ value, result }) {
     <Link href="/articles/[id]" as={`/articles/${id}`}>
       <StyledLink className="searchResult">
         <div>
-          <img
+          <Image
             src={image[0].formats.thumbnail.url}
             alt={image[0].alternativeText}
-            width="120"
-            heigth="120"
+            width={120}
+            height={80}
+            layout="fixed"
           />
           <h2>
             {title}
