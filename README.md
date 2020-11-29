@@ -1,6 +1,6 @@
 # Next.js Blog with Strapi
 
-Static demo blog. Deployed on [Netlify](https://www.netlify.com/).
+Static demo blog. Deployed on [Vercel](https://vercel.com).
 
 ## [Dependencies](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/package.json#L10)
 
