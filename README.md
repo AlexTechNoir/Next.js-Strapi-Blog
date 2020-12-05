@@ -27,23 +27,23 @@ Static demo blog. Deployed on [Vercel](https://vercel.com).
 ## How did I do...
 
 <details>
-  <summary>Search with highlighted results</summary>
+  <summary>Search with highlighted results and cut text around match</summary>
   <br>
   <ol>
     <li>When user enters value, we <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/header/SearchBar.js#L101">grab its changes</a>.</li>
     <li>Search happens <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/header/SearchBar.js#L71">onSubmit</a>.</li>
-    <li>It's important not to use Next.js's <a href="https://nextjs.org/docs/routing/dynamic-routes">dynamic routes</a> here, because blog would not be static if we'd have pages, depending on user's request (but if you're OK with hybrid/dynamic blog, than it's alright to use them (btw, maybe <a href="https://nextjs.org/docs/routing/dynamic-routes#optional-catch-all-routes">optional catch all routes</a> will somehow work with static site too, but I haven't tested it)). Instead we go to search page with query passed through "?" sign, <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/header/SearchBar.js#L66">here</a>.</li>
+    <li>It's important not to use Next.js's <a href="https://nextjs.org/docs/routing/dynamic-routes">dynamic routes</a> here, because blog would not be static if we'd have pages, depending on user's request (but if you're OK with hybrid/dynamic blog, then it's alright to use them (btw, maybe <a href="https://nextjs.org/docs/routing/dynamic-routes#optional-catch-all-routes">optional catch all routes</a> will somehow work with static site too, but I haven't tested it)). Instead we go to search page with query passed through "?" sign, <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/header/SearchBar.js#L66">here</a>.</li>
     <li>Search page will <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/search.js#L14">fetch</a> Strapi's API and will <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/search.js#L23">render</a> the filtered results based on query parameter.</li>
     <li>In search result we <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/search/SearchResult.js#L15">convert markup to html</a> and <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/search/SearchResult.js#L16">html to text</a>.</li>
     <li>We <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/search/SearchResult.js#L100">divide text into array based on value match</a> and <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/search/SearchResult.js#L101">create new text as array with "mark" tag around match</a>.</li>
-    <li>Then in useEffect, initially and every time the search value gets changed, we look for "mark" tags in text and cut the text around the first match (or just write "no match" if there is no match). The namings should be self-explanatory <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/search/SearchResult.js#L20">here</a>.</li>
+    <li>Then in useEffect, initially and every time the search value gets changed, we look for "mark" tags in text and cut the text around the first match (or just write "no match" if there is no match). The variable names should be self-explanatory <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/search/SearchResult.js#L20">here</a>.</li>
     <li>It's important to wrap the text inside "p" tag with, for example, <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/search/SearchResult.js#L97">"span" tag</a> to avoid React NotFoundError, which occurs when we re-render page (here: search for the second time) after manipulating the DOM (highlighting). Explained <a href="https://stackoverflow.com/a/54342788/10489004">here</a>.</li>
     <li>Last important thing: when we search for the second time and if in search result list we got result that was in the previous list (but with different match this time) then it will reflect previous highlighted match, which is not what we want. To avoid this we must explicitly remove old results and load new when we search. We can do this by triggering <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/search.js#L35">re-fetch</a> - this will cause "isValidating" parameter to <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/search.js#L50">change</a> on every search, replacing previous results with skeleton load and then load new results with correct highlighted match.</li>
   </ol>
 </details>
 
 <details>
-  <summary>Pagination</summary>
+  <summary>"Load More" pagination</summary>
   <br>
   <ol>
     <li>Featured articles <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/index.js#L18">are fetched</a> on server-side as usual for SEO.</li>
