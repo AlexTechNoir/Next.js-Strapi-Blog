@@ -49,6 +49,8 @@ export default function ProgressiveImage({ preview, image, alt }) {
       style={style(isLoading)} 
       src={currentImage} 
       alt={alt} 
+      width="1200"
+      height="800"
     />
   )
 }

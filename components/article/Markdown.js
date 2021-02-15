@@ -52,6 +52,7 @@ const Figure = styled.figure`
   > img {
     width: 100%;
     max-width: 1200px;
+    height: auto;
   }
   > figcaption {
     text-align: center;
