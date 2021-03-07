@@ -40,7 +40,7 @@ export default function Home({ articles }) {
         <meta name="description" content="Home page of my blog" />
       </Head>
 
-      <DivIndex>
+      <MainIndex>
         {!articles ? (
           skeletonArr.map(i => {
             return (
@@ -83,12 +83,12 @@ export default function Home({ articles }) {
             }
           </>
         )}
-      </DivIndex>
+      </MainIndex>
     </>
   )
 }
 
-const DivIndex = styled.div`
+const MainIndex = styled.main`
   grid-area: 2 / 1 / 3 / 2;
   display: flex;
   flex-direction: column;

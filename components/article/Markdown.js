@@ -51,7 +51,6 @@ const Figure = styled.figure`
   margin: 0;
   > img {
     width: 100%;
-    max-width: 1200px;
     height: auto;
   }
   > figcaption {
