@@ -34,7 +34,9 @@ export default function Article({ params, article }) {
     <>
       <Head>
         <title>{data.title}</title>
-        <meta name="description" content={data.content} />
+        <meta name="description" content={data.content.substring(0, 150) + '...'} />
+        <meta property="og:image" content={data.image[0].url} />
+        <meta name="twitter:image" content={data.image[0].url} />
       </Head>
 
       <DivArticle>
