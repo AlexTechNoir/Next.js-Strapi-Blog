@@ -1,10 +1,11 @@
 import useSWR from 'swr'
 import styled from 'styled-components'
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
 
 import Markdown from '../../components/article/Markdown'
 import SocialButtons from '../../components/article/SocialButtons'
-import Comments from '../../components/article/Comments'
+const Comments = dynamic(() => import('../../components/article/Comments'))
 
 const fetcher = url => fetch(url).then(r => r.json())
 

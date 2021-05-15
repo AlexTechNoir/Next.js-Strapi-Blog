@@ -3,6 +3,7 @@ import Chip from '@material-ui/core/Chip'
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { CommentCount } from 'disqus-react'
 
 export default function ListItem({ i }) {
   const [ isCategories, setIsCategories ] = useState(true)
@@ -44,11 +45,19 @@ export default function ListItem({ i }) {
           )}
           <div>
             <span>
-              <span
-                className="fb-comments-count"
-                data-href={`${process.env.NEXT_PUBLIC_PROD_HOST}/articles/${i.id}`}
-              ></span>
-              comment(s)
+              <CommentCount
+                shortname='youknowwhatblog'
+                config={
+                  {
+                    url: `${process.env.NEXT_PUBLIC_PROD_HOST}/articles/${i.id.toString()}`,
+                    identifier: i.id.toString(),
+                    title: i.title.toString(),
+                  }
+                }
+              >
+                {/* Placeholder Text */}
+                Comments
+              </CommentCount>
             </span>
             <time dateTime={`${i.published_at.slice(0, 10)}`}>
               {new Date(i.published_at).toDateString().slice(4)}

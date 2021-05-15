@@ -1,24 +1,20 @@
 import styled from 'styled-components'
-import { useEffect, useContext } from 'react'
-import Context from '../../context'
+import { DiscussionEmbed } from 'disqus-react'
 
 export default function DisqusComments({ params }) {
-  const { isDarkModeOn } = useContext(Context)
-
-  useEffect(() => {
-    window.FB.XFBML.parse()
-  })
-
   return (
     <Footer>
-      <div
-        className='fb-comments'
-        data-href={`${process.env.NEXT_PUBLIC_PROD_HOST}/articles/${params.id}`}
-        data-numposts='10'
-        data-width='100%'
-        data-colorscheme={`${isDarkModeOn ? 'dark' : 'light'}`}
-        data-lazy={true}
-      ></div>
+      <DiscussionEmbed
+        shortname='youknowwhatblog'
+        config={
+          {
+            url: `${process.env.NEXT_PUBLIC_PROD_HOST}/articles/${params.id.toString()}`,
+            identifier: params.id.toString(),
+            title: params.title.toString(),
+            language: 'en_GB'
+          }
+        }
+      />
     </Footer>
   )
 }
