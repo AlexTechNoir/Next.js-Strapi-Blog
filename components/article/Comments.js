@@ -1,16 +1,16 @@
 import styled from 'styled-components'
 import { DiscussionEmbed } from 'disqus-react'
 
-export default function DisqusComments({ params }) {
+export default function Comments({ params }) {
   return (
     <Footer>
       <DiscussionEmbed
         shortname='youknowwhatblog'
         config={
           {
-            url: `${process.env.NEXT_PUBLIC_PROD_HOST}/articles/${params.id.toString()}`,
-            identifier: params.id.toString(),
-            title: params.title.toString(),
+            url: `${process.env.NEXT_PUBLIC_PROD_HOST}/articles/${params.id}`,
+            identifier: params.id,
+            title: params.title,
             language: 'en_GB'
           }
         }

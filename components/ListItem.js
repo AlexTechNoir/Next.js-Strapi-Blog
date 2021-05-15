@@ -49,9 +49,9 @@ export default function ListItem({ i }) {
                 shortname='youknowwhatblog'
                 config={
                   {
-                    url: `${process.env.NEXT_PUBLIC_PROD_HOST}/articles/${i.id.toString()}`,
-                    identifier: i.id.toString(),
-                    title: i.title.toString(),
+                    url: `${process.env.NEXT_PUBLIC_PROD_HOST}/articles/${i.id}`,
+                    identifier: i.id,
+                    title: i.title,
                   }
                 }
               >
