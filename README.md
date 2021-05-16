@@ -20,9 +20,9 @@ Static demo blog. Deployed on [Vercel](https://vercel.com).
 - hamburger menu for mobile layout
 - "Load More" pagination
 - SEO-friendly article list initially fetched on server-side (paginated - client-side)
-- progressive images
+- progressive responsive images
 - categories
-- like\share\tweet buttons, comment section
+- Disqus comment section
 
 ## How did I do...
 
@@ -47,9 +47,9 @@ Static demo blog. Deployed on [Vercel](https://vercel.com).
   <br>
   <ol>
     <li>Featured articles <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/index.js#L18">are fetched</a> on server-side as usual for SEO.</li>
-    <li>We <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/index.js#L26">fetch</a> paginated data on client-side with <a href="https://swr.vercel.app/docs/pagination">useSWRInfinite</a>.</li>
+    <li>We <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/index.js#L26">fetch</a> paginated data on client-side with <a href="https://swr.vercel.app/docs/pagination#useswrinfinite">useSWRInfinite</a>.</li>
     <li>We use "size" and "setSize" parameters to change page index.</li>
-    <li>But instead of page index Strapi's API has <a href="https://strapi.io/documentation/v3.x/content-api/parameters.html#start">Start param</a> pointing at index from which data should be fetched and <a href="https://strapi.io/documentation/v3.x/content-api/parameters.html#limit">Limit param</a>.</li>
+    <li>But instead of page index Strapi's API has <a href="https://strapi.io/documentation/developer-docs/latest/developer-resources/content-api/content-api.html#start">Start param</a> pointing at index from which data should be fetched and <a href="https://strapi.io/documentation/developer-docs/latest/developer-resources/content-api/content-api.html#limit">Limit param</a>.</li>
     <li>In getKey function <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/index.js#L12">"pageIndex" parameter</a> is the "size" parameter. It always starts with 0.</li>
     <li>We set <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/index.js#L14">limit param to 1 (fetch 1 article), start param - to "pageIndex + 7"</a> (because first 7 artciles are already fetched on server-side).</li>
     <li>On every time user clicks "Load More" button, we <a href="https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/index.js#L77">increase</a> size param to amount of times we need to fetch 1 artcile in one click (here we need 4, which depends on desktop layout).</li>
@@ -60,16 +60,14 @@ Static demo blog. Deployed on [Vercel](https://vercel.com).
 ## What did I use to make this demo:
 
 - [Create Next App](https://nextjs.org/docs/getting-started#setup)
-- [styled-components](https://github.com/styled-components/styled-components) (examples: [global style](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/_app.js#L77), [usual style](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/_app.js#L153))
+- [styled-components](https://github.com/styled-components/styled-components) (examples: [global style](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/_app.js#L77), [usual style](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/_app.js#L152))
 - [Material-UI](https://github.com/mui-org/material-ui) ([Autocomplete example](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/header/SearchBar.js#L72))
 - [React Font Awesome](https://github.com/FortAwesome/react-fontawesome) ([example](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/header/UsualMenu.js#L75))
-- [react-markdown](https://github.com/rexxars/react-markdown) ([example](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/article/Markdown.js#L26))
+- [react-markdown](https://github.com/rexxars/react-markdown) ([example](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/article/Markdown.js#L29))
 - [Showdown](https://github.com/showdownjs/showdown) ([example](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/search/SearchResult.js#L15))
 - [SWR](https://github.com/vercel/swr) (examples: [client-side](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/search.js#L14), [server-side](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/pages/categories/%5Bid%5D.js#L32))
-- Facebook [Like\Share Buttons](https://developers.facebook.com/docs/plugins/like-button) ([example](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/article/SocialButtons.js#L13)) and [Comments](https://developers.facebook.com/docs/plugins/comments) ([example](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/article/Comments.js))
-- Twitter [Tweet Button](https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview) ([example](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/article/SocialButtons.js#L22))
+- [disqus-react](https://github.com/disqus/disqus-react) (examples: [comments](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/article/Comments.js#L7), [comment count](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/components/ListItem.js#L48))
 
 ## Notes:
 
 - at first load there is FOUC from Material-UI. MUI has [recommendations for server rendering](https://material-ui.com/guides/server-rendering/) and [example for Next.js](https://github.com/mui-org/material-ui/tree/master/examples/nextjs), however this measures doesn't work for everyone. There is fix, but it [works only in dev mode](https://github.com/vercel/next.js/issues/13058#issuecomment-666948357). Upd: as a temp fix, use [this](https://github.com/vercel/next.js/issues/13058#issuecomment-763746324).
-- Facebook comment counters may be loaded slow (I guess it depends on Facebook)
