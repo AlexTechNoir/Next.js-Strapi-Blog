@@ -96,7 +96,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Georgia, sans-serif;
     height: 100%;
-    scroll-behavior: smooth;
     background-color: #FFFFFF; 
   }
 

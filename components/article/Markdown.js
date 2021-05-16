@@ -18,7 +18,10 @@ export default function Markdown({ data }) {
       <Figure>
         <ProgressiveImage
           preview={data.image[0].formats.thumbnail.url}
-          image={data.image[0].url}
+          smallImage={data.image[0].formats.small.url}
+          mediumImage={data.image[0].formats.medium.url}
+          largeImage={data.image[0].formats.large.url}
+          sourceImage={data.image[0].url}
           alt={data.image[0].alternativeText}
         />
         <figcaption><em>{data.image[0].caption}</em></figcaption>
