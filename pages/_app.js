@@ -97,6 +97,13 @@ const GlobalStyle = createGlobalStyle`
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Georgia, sans-serif;
     height: 100%;
     background-color: #FFFFFF; 
+    scroll-behavior: smooth;    
+  }
+
+  @media (prefers-reduced-motion) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   #__next {
@@ -126,6 +133,15 @@ const GlobalStyle = createGlobalStyle`
       background-color: hsla(101, 100%, 0%, 1);
       color: hsla(0, 100%, 100%, 0.9);
     } 
+    
+    .contents {
+      color: hsla(0, 100%, 100%, 0.9);
+      border: 2px solid white;
+    }
+
+    .comments {
+      color: hsla(0, 100%, 100%, 0.9);
+    }
 
     form, 
     .categories, 

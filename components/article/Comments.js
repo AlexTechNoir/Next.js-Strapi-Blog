@@ -3,7 +3,7 @@ import { DiscussionEmbed } from 'disqus-react'
 
 export default function Comments({ params }) {
   return (
-    <Footer>
+    <Footer className="comments">
       <DiscussionEmbed
         shortname='youknowwhatblog'
         config={

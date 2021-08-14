@@ -1,6 +1,8 @@
 import useSWR from 'swr'
 import styled from 'styled-components'
 import Head from 'next/head'
+import { series } from 'async'
+const { exec } = require('child_process')
 
 import Markdown from '../../components/article/Markdown'
 import Comments from '../../components/article/Comments'
@@ -19,16 +21,20 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const article = await fetcher(`${process.env.NEXT_PUBLIC_HCMS_API_URL}/articles/${params.id}`)
 
+  series([
+    () => exec('npm run postbuild')
+  ])
+
   return { 
     props: { params, article }, 
-    revalidate: 1
+    revalidate: 10
   }
 }
 
 export default function Article({ params, article }) {
   const initialData = article
   const { data } = useSWR(`${process.env.NEXT_PUBLIC_HCMS_API_URL}/articles/${params.id}`, fetcher, { initialData })
-  
+
   return (
     <>
       <Head>
@@ -51,9 +57,9 @@ const DivArticle = styled.article`
   justify-self: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
   max-width: 1200px;
+  align-items: center;
   > h1, h2, h3, h4, h5, h6 {
     margin-left: 1em;
     margin-right: 1em;
@@ -82,6 +88,10 @@ const DivArticle = styled.article`
     padding-left: 1em;
     align-self: start;
     font-style: italic;
+  }
+  > nav {
+    align-self: flex-start;
+    margin-left: 2em;
   }
 
   @media only screen and (min-width: 1248px) {
