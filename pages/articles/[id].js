@@ -1,8 +1,6 @@
 import useSWR from 'swr'
 import styled from 'styled-components'
 import Head from 'next/head'
-import { series } from 'async'
-const { exec } = require('child_process')
 
 import Markdown from '../../components/article/Markdown'
 import Comments from '../../components/article/Comments'
@@ -20,10 +18,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const article = await fetcher(`${process.env.NEXT_PUBLIC_HCMS_API_URL}/articles/${params.id}`)
-
-  series([
-    () => exec('npm run postbuild')
-  ])
 
   return { 
     props: { params, article }, 
