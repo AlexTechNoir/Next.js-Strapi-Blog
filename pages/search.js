@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import useSWR, { mutate } from 'swr'
 import styled from 'styled-components'
@@ -36,35 +35,29 @@ export default function SearchResults() {
   }, [searchValue])
 
   return (
-    <>
-      <Head>
-        <meta name="robots" content="noindex" />
-      </Head>
-
-      <DivSearchResults>
-        {
-          filteredData.every(dataItem => dataItem === undefined)
-          ? <span>No results for "{searchValue}"</span>
-          : <span>Search results for "{searchValue}" :</span>
-        }  
-        {!data || isValidating ? (
-          skeletonArr.map(result => {
-            return (
-              <div key={result}>
-                <Skeleton variant="circle" width={45} height={45} />
-                <Typography component="div" key="h2" variant="h2">
-                  <Skeleton />
-                </Typography>
-              </div>
-            )
-          })
-        ) : error ? (
-          <div>Error</div>
-        ) : (
-          filteredData
-        )}
-      </DivSearchResults>
-    </>
+    <DivSearchResults>
+      {
+        filteredData.every(dataItem => dataItem === undefined)
+        ? <span>No results for "{searchValue}"</span>
+        : <span>Search results for "{searchValue}" :</span>
+      }  
+      {!data || isValidating ? (
+        skeletonArr.map(result => {
+          return (
+            <div key={result}>
+              <Skeleton variant="circle" width={45} height={45} />
+              <Typography component="div" key="h2" variant="h2">
+                <Skeleton />
+              </Typography>
+            </div>
+          )
+        })
+      ) : error ? (
+        <div>Error</div>
+      ) : (
+        filteredData
+      )}
+    </DivSearchResults>
   )
 }
 

@@ -34,6 +34,8 @@ class MyDocument extends Document {
         <Head>
           <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="preload" as="style" />
           <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
+
+          <meta name="robots" content="noindex" />
         </Head>
         <body>
           <Main />
