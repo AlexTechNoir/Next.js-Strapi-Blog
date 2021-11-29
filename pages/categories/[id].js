@@ -22,8 +22,7 @@ export async function getStaticProps({ params }) {
   const category = await fetcher(`${process.env.NEXT_PUBLIC_HCMS_API_URL}/categories/${params.id}`)
 
   return { 
-    props: { params, category }, 
-    revalidate: 1
+    props: { params, category }
   }
 }
 

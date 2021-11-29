@@ -20,8 +20,7 @@ export async function getStaticProps({ params }) {
   const article = await fetcher(`${process.env.NEXT_PUBLIC_HCMS_API_URL}/articles/${params.id}`)
 
   return { 
-    props: { params, article }, 
-    revalidate: 10
+    props: { params, article }
   }
 }
 
