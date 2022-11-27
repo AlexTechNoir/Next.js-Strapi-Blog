@@ -2,6 +2,18 @@
 
 Static demo blog. Deployed on [Vercel](https://vercel.com).
 
+---
+
+WARNING! 
+
+Strapi is deployed on Heroku. Due to Heroku's financial decision to shut down free plans, this project will most likely crash starting with 28.11.22. But all code examples in this repo are valid! You can still study it and learn how I've done some features!
+
+I tried some alternatives and with couple of failures, unfortunately, right now I don't have time to explore for more.
+
+If you also switching from Heroku, be careful with Railway - if you create an account with one e-mail and then link a GitHub account with another (different) e-mail, they may ban you by mistake for "multiple accounts". Tech support's not answering on ban appeals, at least in my case
+
+---
+
 ## [Dependencies](https://github.com/AlexTechNoir/Next.js-Strapi-Blog/blob/master/package.json#L10)
 
 ## Features:
