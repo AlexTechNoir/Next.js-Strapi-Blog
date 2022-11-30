@@ -93,7 +93,7 @@ const StyledLink = styled.a`
       min-width: 288px;
       max-width: 425px;
       height: auto;
-      border-radius: 15px;
+      border-radius: 15px 15px 0px 0px;
     }
     > h1 {
       margin: .5em .5em 0 .5em;
